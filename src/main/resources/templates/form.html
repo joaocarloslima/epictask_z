@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dracula">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <title>Epic Task</title>
+</head>
+<body>
+
+<h1 class="text-primary text-2xl font-bold p-4">Epic Task</h1>
+
+
+<main class="grid grid-cols-1 gap-4 p-4 place-items-center ">
+    <form method="POST" class="w-full max-w-md">
+        <h2 class="text-secondary font-bold text-xl">Nova Tarefa</h2>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Título</legend>
+            <input name="title" type="text" class="input" placeholder="título da tarefa" />
+            <p class="label">campo obrigatório</p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Descrição</legend>
+            <textarea name="description" class="textarea" placeholder="Descrição completa da tarefa"></textarea>
+            <p class="label">pelo menos 10 caracteres</p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Pontos</legend>
+            <input id="score-range" name="score" type="range" min="0" max="100" value="40" class="range range-primary" />
+            <p id="score-label" class="label">40 pts</p>
+        </fieldset>
+
+        <div>
+            <a href="/task" class="btn btn-neutral">Cancelar</a>
+            <button class="btn btn-primary">Salvar</button>
+        </div>
+
+    </form>
+</main>
+
+<script>
+    document.querySelector("#score-range").addEventListener("input", e => {
+        document.querySelector("#score-label").textContent = e.target.value + ' pts'
+    })
+</script>
+
+</body>
+</html>
