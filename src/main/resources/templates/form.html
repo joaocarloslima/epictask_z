@@ -13,29 +13,29 @@
 
 
 <main class="grid grid-cols-1 gap-4 p-4 place-items-center ">
-    <form method="POST" class="w-full max-w-md">
-        <h2 class="text-secondary font-bold text-xl">Nova Tarefa</h2>
+    <form method="POST" class="w-full max-w-md" th:object="${task}">
+        <h2 class="text-secondary font-bold text-xl" th:text="#{task.new}"></h2>
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">Título</legend>
-            <input name="title" type="text" class="input" placeholder="título da tarefa" />
-            <p class="label">campo obrigatório</p>
+            <legend class="fieldset-legend" th:text="#{title}"></legend>
+            <input th:field="*{title}" th:errorclass="input-error" type="text" class="input" />
+            <p class="label text-error" th:errors="*{title}"></p>
         </fieldset>
 
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">Descrição</legend>
-            <textarea name="description" class="textarea" placeholder="Descrição completa da tarefa"></textarea>
-            <p class="label">pelo menos 10 caracteres</p>
+            <legend class="fieldset-legend" th:text="#{description}"></legend>
+            <textarea th:field="*{description}" th:errorclass="textarea-error" class="textarea"></textarea>
+            <p class="label text-error" th:errors="*{description}"></p>
         </fieldset>
 
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">Pontos</legend>
-            <input id="score-range" name="score" type="range" min="0" max="100" value="40" class="range range-primary" />
-            <p id="score-label" class="label">40 pts</p>
+            <legend class="fieldset-legend" th:text="#{score}"></legend>
+            <input id="score-range" th:field="*{score}" type="range" min="0" max="100" value="40" class="range range-primary" />
+            <p id="score-label" class="label" th:text="${task.score + ' pts'}"></p>
         </fieldset>
 
         <div>
-            <a href="/task" class="btn btn-neutral">Cancelar</a>
-            <button class="btn btn-primary">Salvar</button>
+            <a href="/task" class="btn btn-neutral" th:text="#{cancel}"></a>
+            <button class="btn btn-primary" th:text="#{save}"></button>
         </div>
 
     </form>
