@@ -13,7 +13,7 @@
 
 
 <main class="grid grid-cols-1 gap-4 p-4 place-items-center ">
-    <form method="POST" class="w-full max-w-md" th:object="${task}">
+    <form method="POST" class="w-full max-w-md" th:object="${task}" th:action="${'/task/form'}">
         <h2 class="text-secondary font-bold text-xl" th:text="#{task.new}"></h2>
         <fieldset class="fieldset">
             <legend class="fieldset-legend" th:text="#{title}"></legend>
