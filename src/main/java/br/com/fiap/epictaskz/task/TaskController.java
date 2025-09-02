@@ -1,5 +1,6 @@
 package br.com.fiap.epictaskz.task;
 
+import br.com.fiap.epictaskz.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -17,10 +18,12 @@ public class TaskController {
 
     private final TaskService taskService;
     private final MessageSource messageSource;
+    private final UserService userService;
 
-    public TaskController(TaskService taskService, MessageSource messageSource) {
+    public TaskController(TaskService taskService, MessageSource messageSource, UserService userService) {
         this.taskService = taskService;
         this.messageSource = messageSource;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -50,6 +53,30 @@ public class TaskController {
         taskService.delete(id);
         var message = messageSource.getMessage("task.delete.success", null, LocaleContextHolder.getLocale());
         redirect.addFlashAttribute("message", message);
+        return "redirect:/task";
+    }
+
+    @PutMapping("pick/{id}")
+    public String pick(@PathVariable Long id, @AuthenticationPrincipal OAuth2User principal ){
+        taskService.pick(id, userService.register(principal));
+        return "redirect:/task";
+    }
+
+    @PutMapping("drop/{id}")
+    public String drop(@PathVariable Long id, @AuthenticationPrincipal OAuth2User principal ){
+        taskService.drop(id, userService.register(principal));
+        return "redirect:/task";
+    }
+
+    @PutMapping("inc/{id}")
+    public String increment(@PathVariable Long id, @AuthenticationPrincipal OAuth2User principal ){
+        taskService.incrementTaskStatus(id, userService.register(principal));
+        return "redirect:/task";
+    }
+
+    @PutMapping("dec/{id}")
+    public String decrement(@PathVariable Long id, @AuthenticationPrincipal OAuth2User principal ){
+        taskService.decrementTaskStatus(id, userService.register(principal));
         return "redirect:/task";
     }
 
