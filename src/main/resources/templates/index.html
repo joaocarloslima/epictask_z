@@ -31,7 +31,7 @@
                 <div class="w-10 rounded-full">
                     <img
                             alt="Tailwind CSS Navbar component"
-                            th:src="${user.attributes.picture}" />
+                            th:src="${user.attributes.avatar_url}" />
                 </div>
             </div>
             <ul
@@ -63,7 +63,10 @@
         </div>
 
         <div class="justify-end card-actions m-4">
-            <button class="btn btn-primary" th:text="#{delete}"></button>
+            <form th:action="${'/task/' + task.id}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-primary" th:text="#{delete}"></button>
+            </form>
         </div>
     </div>
 </main>
