@@ -41,6 +41,9 @@ public class TaskService {
 
     public void drop(Long id, User user) {
         var task = getTask(id);
+        if(!task.getUser().equals(user)) {
+            throw new IllegalStateException("Você não é o dono da tarefa");
+        }
         task.setUser(null);
         taskRepository.save(task);
     }

@@ -1,7 +1,7 @@
 services:
   postgres:
     image: 'postgres:latest'
-    container_name: postgres_z
+    container_name: postgres_zz
     environment:
       - 'POSTGRES_DB=epictask'
       - 'POSTGRES_PASSWORD=epictask'
